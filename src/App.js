@@ -1,25 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import PropComponent from './PropComponent';
+import ErrorBoundary from './ErrorBoundary';
+import ToastComponent from './ToastComponent';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class ComponentThatThrows extends React.Component {
+    render() {
+        //throw new Error("Ho lanciato un errore!");
+        return <div>Non verrò mai visualizzato</div>;
+    }
 }
 
+function App() {
+    return (
+        <>
+        <PropComponent />
+
+        <ErrorBoundary>
+            <ComponentThatThrows />
+            <ToastComponent />
+        </ErrorBoundary>
+    </>);
+}
 export default App;
+
+
